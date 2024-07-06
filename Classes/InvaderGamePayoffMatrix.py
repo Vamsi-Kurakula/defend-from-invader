@@ -1,7 +1,7 @@
 import pandas as pd
 from tabulate import tabulate
 
-class InvaderGame:
+class InvaderGamePayoff:
     def __init__(self, V, C, D):
         """
         Initializes a Tripartitite Invader Game 

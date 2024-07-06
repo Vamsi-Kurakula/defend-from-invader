@@ -1,19 +1,24 @@
 import pandas as pd
 from tabulate import tabulate
 
-class InvaderGamePayoff:
-    def __init__(self, V, C, D):
+class InvaderGamePayoffMatrix:
+    def __init__(self, V, C, S, D, A):
         """
         Initializes a Tripartitite Invader Game 
     
         Args:
             V (int): Resource Gain
             C (int): Cost of Self Interest
+            C (int): Synergy Factor
             D (int): Damage from Invader
+            A (int): Cost of attacking from Invaders
         """
         self.V = V
         self.C = C
+        self.S = S
         self.D = D
+        self.A = A
+        self.B = D/2 #Damaged in a blocked attack 
         self.Time = 0
         self.Game = {}
 
@@ -22,16 +27,16 @@ class InvaderGamePayoff:
         # Updates game given current state of variables 
         """        
         # Invader being Passive
-        self.Game['c-c-p'] = [self.V / 2, self.V / 2, -1 * self.V]
-        self.Game['c-d-p'] = [-self.D, self.V - self.D, -1 * (self.V - (2* self.D))]
-        self.Game['d-c-p'] = [self.V - self.D, -self.D, -1 * (self.V - (2* self.D))]
-        self.Game['d-d-p'] = [self.V/2 - self.C - self.D, self.V/2 - self.C - self.D, -1 *(self.V - (2* self.C) - (2*self.D))]
+        self.Game['c-c-p'] = [self.V / 2 * self.S, self.V / 2 * self.S, -1 * (self.V *self.S)]
+        self.Game['c-d-p'] = [0, self.V, -1 * (self.V)]
+        self.Game['d-c-p'] = [self.V, 0, -1 * (self.V)]
+        self.Game['d-d-p'] = [(self.V - self.C)/2, (self.V - self.C)/2, -1 *(self.V - self.C)]
 
         # Invader being Active
-        self.Game['c-c-a'] = [self.V / 2, self.V / 2, -1 * self.V]
-        self.Game['c-d-a'] = [-self.D, self.V - self.D, -1 * (self.V - (2* self.D))]
-        self.Game['d-c-a'] = [self.V - self.D, -self.D, -1 * (self.V - (2* self.D))]
-        self.Game['d-d-a'] = [self.V/2 - self.C - self.D, self.V/2 - self.C - self.D, -1 *(self.V - (2* self.C) - (2*self.D))]
+        self.Game['c-c-a'] = [(self.V/2* self.S)-self.B, (self.V/2*self.S)-self.B, -1 * ((self.V * self.S) - (2*self.B)+ self.A) ]
+        self.Game['c-d-a'] = [-self.D, self.V - self.D, -1 * (self.V - (2* self.D)  + self.A)]
+        self.Game['d-c-a'] = [self.V - self.D, -self.D, -1 * (self.V - (2* self.D) + self.A)]
+        self.Game['d-d-a'] = [self.V/2 - self.C - self.D, self.V/2 - self.C - self.D, -1 *(self.V - (2* self.C) - (2*self.D)  + self.A)]
 
         return
 

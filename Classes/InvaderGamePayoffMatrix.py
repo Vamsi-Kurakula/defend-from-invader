@@ -13,46 +13,46 @@ class InvaderGamePayoffMatrix:
             D (int): Damage from Invader
             A (int): Cost of attacking from Invaders
         """
-        self.V = V
-        self.C = C
-        self.S = S
-        self.D = D
-        self.A = A
-        self.B = D/2 #Damaged in a blocked attack
-        self.Time = 0
-        self.Game = {}
+        self.value = V
+        self.cost = C
+        self.synergy = S
+        self.damage = D
+        self.attack = A
+        self.block = D/2 #Damaged in a blocked attack
+        self.time = 0
+        self.game = {}
 
     def updateGame(self):
         """
         # Updates game given current state of variables 
         """
         # Invader being Passive
-        self.Game['c-c-p'] = [self.V / 2 * self.S, # Human 1
-                              self.V / 2 * self.S, # Human 2
-                              -1 * (self.V *self.S)] # Invader
-        self.Game['c-s-p'] = [0,
-                              self.V,
-                              -1 * (self.V)]
-        self.Game['s-c-p'] = [self.V,
+        self.game['c-c-p'] = [self.value / 2 * self.synergy, # Human 1
+                              self.value / 2 * self.synergy, # Human 2
+                              -1 * (self.value *self.synergy)] # Invader
+        self.game['c-s-p'] = [0,
+                              self.value,
+                              -1 * (self.value)]
+        self.game['s-c-p'] = [self.value,
                               0,
-                              -1 * (self.V)]
-        self.Game['s-s-p'] = [(self.V - self.C)/2,
-                              (self.V - self.C)/2,
-                              -1 *(self.V - self.C)]
+                              -1 * (self.value)]
+        self.game['s-s-p'] = [(self.value - self.cost)/2,
+                              (self.value - self.cost)/2,
+                              -1 *(self.value - self.cost)]
 
         # Invader being Active
-        self.Game['c-c-a'] = [(self.V/2* self.S)-self.B,
-                              (self.V/2*self.S)-self.B,
-                              -1 * ((self.V * self.S) - (2*self.B)+ self.A) ]
-        self.Game['c-s-a'] = [-self.D,
-                              self.V - self.D,
-                              -1 * (self.V - (2* self.D)  + self.A)]
-        self.Game['s-c-a'] = [self.V - self.D,
-                              -self.D,
-                              -1 * (self.V - (2* self.D) + self.A)]
-        self.Game['s-s-a'] = [self.V/2 - self.C - self.D,
-                              self.V/2 - self.C - self.D,
-                              -1 *(self.V - (2* self.C) - (2*self.D)  + self.A)]
+        self.game['c-c-a'] = [(self.value/2* self.synergy)-self.block,
+                              (self.value/2*self.synergy)-self.block,
+                              -1 * ((self.value * self.synergy) - (2*self.block)+ self.attack) ]
+        self.game['c-s-a'] = [-self.damage,
+                              self.value - self.damage,
+                              -1 * (self.value - (2* self.damage)  + self.attack)]
+        self.game['s-c-a'] = [self.value - self.damage,
+                              -self.damage,
+                              -1 * (self.value - (2* self.damage) + self.attack)]
+        self.game['s-s-a'] = [self.value/2 - self.cost - self.damage,
+                              self.value/2 - self.cost - self.damage,
+                              -1 *(self.value - (2* self.cost) - (2*self.damage)  + self.attack)]
 
     def __repr__(self):
 
@@ -60,11 +60,11 @@ class InvaderGamePayoffMatrix:
             ["Invader", "", "", "", ""],
             ["", "Passive", "", "Aggressive", ""],
             ["Human 1/ Human 2", "Collaborate", "Self-Interest", "Collaborate", "Self-Interest"],
-            ["Collaborate", self.Game['c-c-p'], self.Game['c-d-p'], self.Game['c-c-a'], self.Game['c-d-a']],
-            ["Self-Interest", self.Game['d-c-p'], self.Game['d-d-p'], self.Game['d-c-a'], self.Game['d-d-a']]
+            ["Collaborate", self.game['c-c-p'], self.game['c-s-p'], self.game['c-c-a'], self.game['c-s-a']],
+            ["Self-Interest", self.game['s-c-p'], self.game['s-s-p'], self.game['s-c-a'], self.game['s-s-a']]
         ]
 
         # Create a DataFrame
         df = pd.DataFrame(data)
-        
+  
         return tabulate(df.values, tablefmt="grid", stralign='center')

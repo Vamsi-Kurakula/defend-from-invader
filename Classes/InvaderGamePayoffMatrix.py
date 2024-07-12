@@ -19,13 +19,16 @@ class InvaderGamePayoffMatrix:
         self.damage = D
         self.attack = A
         self.block = D/2 #Damaged in a blocked attack
-        self.time = 0
+        self.time = -1 # Start time at -1 so first update is time = 0
         self.game = {}
 
     def update_game(self):
         """
         # Updates game given current state of variables 
         """
+        # Update time in game
+        self.time += 1
+
         # Invader being Passive
         self.game['c-c-p'] = [self.value / 2 * self.synergy, # Human 1
                               self.value / 2 * self.synergy, # Human 2
@@ -54,11 +57,17 @@ class InvaderGamePayoffMatrix:
                               self.value/2 - self.cost - self.damage,
                               -1 *(self.value - (2* self.cost) - (2*self.damage)  + self.attack)]
 
-    def __repr__(self):
+    def get_payoffs(self, human1, human2, invader):
+        '''
+        Given current state of the game, obtain payoffs
+        '''
+        return self.game[f"{human1}-{human2}-{invader}"]
+
+    def print_gamestate(self):
 
         data = [
-            ["Invader", "", "", "", ""],
-            ["", "Passive", "", "Aggressive", ""],
+            ["", "", f"Time: {self.time}", "", ""],
+            ["Invader:", "Passive", "", "Aggressive", ""],
             ["Human 1/ Human 2", "Collaborate", "Self-Interest", "Collaborate", "Self-Interest"],
             ["Collaborate", self.game['c-c-p'], self.game['c-s-p'], self.game['c-c-a'], self.game['c-s-a']],
             ["Self-Interest", self.game['s-c-p'], self.game['s-s-p'], self.game['s-c-a'], self.game['s-s-a']]
@@ -67,4 +76,15 @@ class InvaderGamePayoffMatrix:
         # Create a DataFrame
         df = pd.DataFrame(data)
 
-        return tabulate(df.values, tablefmt="grid", stralign='center')
+        print(tabulate(df.values, tablefmt="grid", stralign='center'))
+
+    def __repr__(self):
+        output = f'''Tripartite Invader Game Settings:
+Value: {self.value} 
+Cost: {self.cost}
+Synergy Factor: {self.synergy}
+Attacking Cost: {self.attack}
+Damage: {self.damage}
+Time: {self.time}
+'''
+        return output

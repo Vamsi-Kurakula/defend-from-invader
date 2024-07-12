@@ -14,6 +14,6 @@ A = 2 # Cost of Attacking from Invader
 D = 20 # Damage from Invader
 
 vamsi = InvaderGamePayoffMatrix(V, C, S, D, A)
-vamsi.updateGame()
+vamsi.update_game()
 
 print(vamsi)

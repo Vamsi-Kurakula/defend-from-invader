@@ -22,7 +22,7 @@ class InvaderGamePayoffMatrix:
         self.time = 0
         self.game = {}
 
-    def updateGame(self):
+    def update_game(self):
         """
         # Updates game given current state of variables 
         """
@@ -66,5 +66,5 @@ class InvaderGamePayoffMatrix:
 
         # Create a DataFrame
         df = pd.DataFrame(data)
-  
+
         return tabulate(df.values, tablefmt="grid", stralign='center')

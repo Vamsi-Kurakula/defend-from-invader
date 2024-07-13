@@ -15,13 +15,13 @@ SYNERGY = 1.5 # Synergy Factor
 
 # Invader Focused Variables
 DAMAGE = 20 # Damage from Invader
-ATTACK = 2 # Cost of Attacking from Invader
+ATTACK = 5 # Cost of Attacking from Invader
 
 # Simulation settings  
-ROUNDS = range(100)
+ROUNDS = range(1000)
 human_1 = PlayerInformation(name='Human_1', action_set=['c', 's'], strategy=.5)
 human_2 = PlayerInformation(name='Human_2', action_set=['c', 's'], strategy=.5)
-invader = PlayerInformation(name='Invader', action_set=['p', 'a'], strategy=.5)
+invader = PlayerInformation(name='Invader', action_set=['p', 'a'], strategy=.9)
 
 # Create and initalize game
 game = InvaderGamePayoffMatrix(VALUE, COST, SYNERGY, DAMAGE, ATTACK)
@@ -29,17 +29,31 @@ game = InvaderGamePayoffMatrix(VALUE, COST, SYNERGY, DAMAGE, ATTACK)
 for i_round in ROUNDS:
     game.update_game()
 
-    payoffs = game.get_payoffs(human_1.get_action(),
-                           human_2.get_action(),
-                           invader.get_action())
+    human_1.get_action()
+    human_2.get_action()
+    invader.get_action()
+
+    payoffs = game.get_payoffs(human_1.current_action,
+                           human_2.current_action,
+                           invader.current_action)
     
     human_1.update_payoff(payoffs[0])
     human_2.update_payoff(payoffs[1])
     invader.update_payoff(payoffs[2])
 
-    human_1.update_strategy(payoffs[0], payoffs)
-    human_2.update_strategy(payoffs[1], payoffs)
-    invader.update_strategy(payoffs[2], payoffs)
+    human_1_alt = game.get_payoffs(human_1.alt_action,
+                                  human_2.current_action,
+                                  invader.current_action)[0]
+    human_2_alt = game.get_payoffs(human_1.current_action,
+                                   human_2.alt_action,
+                                   invader.current_action)[1]
+    invader_alt = game.get_payoffs(human_1.current_action,
+                                   human_2.current_action,
+                                   invader.alt_action)[2]
+
+    human_1.update_strategy(payoffs[0], human_1_alt)
+    human_2.update_strategy(payoffs[1], human_2_alt)
+    invader.update_strategy(payoffs[2], invader_alt)
 
 
 game.print_gamestate()
@@ -57,14 +71,14 @@ Invader: [p: {round(invader.strategy, 2)}, a: {round(1 - invader.strategy,2 )}]
 print(output_string)
 
 # Plotting strategies
-plt.plot(ROUNDS, human_1.strategy_history, label = 'Human 1', color = 'blue')
-plt.plot(ROUNDS, human_2.strategy_history, label = 'Human 2', color = 'green')
-plt.plot(ROUNDS, invader.strategy_history, label = 'Invader', color = 'red')
+plt.plot(ROUNDS, human_1.strategy_history, label = 'Human 1 (Collaborate)', color = 'blue')
+plt.plot(ROUNDS, human_2.strategy_history, label = 'Human 2 (Collaborate)', color = 'green')
+plt.plot(ROUNDS, invader.strategy_history, label = 'Invader (Passive)', color = 'red')
 
 # Add title and labels
 plt.title('Players Strategy Profiles ')
-plt.xlabel('Interaction Number')
-plt.ylabel('Probability of Action 1')
+plt.xlabel('Iteration Number')
+plt.ylabel('Probability of Action (Collaborate or Passive)')
 
 # Display the legend
 plt.legend()

@@ -14,7 +14,8 @@ class PlayerInformation():
         Given an action set and strategy, get a action
         '''
 
-        return random.choices(population=self.action_set, weights=[self.strategy, 1-self.strategy])[0]
+        self.current_action = random.choices(population=self.action_set, weights=[self.strategy, 1-self.strategy])[0]
+        self.alt_action = [item for item in self.action_set if item != self.current_action][0]
 
     def update_payoff(self, my_payoff):
         '''
@@ -22,14 +23,14 @@ class PlayerInformation():
         '''
         self.total_payoff += my_payoff
 
-    def update_strategy(self, my_payoff, game_payoff):
+    def update_strategy(self, my_payoff, alt_payoff):
         
-        if my_payoff >=0:
-            self.strategy += .01
+        factor = 1 if self.current_action == self.action_set[0] else -1
+        
+        if my_payoff >= alt_payoff:
+            self.strategy += .001 * factor
         else: 
-            self.strategy -= .01
-
-        # Incorporate the game information to shift the probabilities 
+            self.strategy -= .001 * factor
 
         # Make sure we bound the strategy between 0 and 1
         self.strategy = min([1, self.strategy])

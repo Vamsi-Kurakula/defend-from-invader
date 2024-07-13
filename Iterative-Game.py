@@ -4,6 +4,7 @@ there is one player in each side of the tripartite
 '''
 
 import random
+import matplotlib.pyplot as plt
 from Classes.InvaderGamePayoffMatrix import InvaderGamePayoffMatrix
 from Classes.PlayerInformation import PlayerInformation
 
@@ -17,7 +18,7 @@ DAMAGE = 20 # Damage from Invader
 ATTACK = 2 # Cost of Attacking from Invader
 
 # Simulation settings  
-ROUNDS = 100
+ROUNDS = range(100)
 human_1 = PlayerInformation(name='Human_1', action_set=['c', 's'], strategy=.5)
 human_2 = PlayerInformation(name='Human_2', action_set=['c', 's'], strategy=.5)
 invader = PlayerInformation(name='Invader', action_set=['p', 'a'], strategy=.5)
@@ -25,7 +26,7 @@ invader = PlayerInformation(name='Invader', action_set=['p', 'a'], strategy=.5)
 # Create and initalize game
 game = InvaderGamePayoffMatrix(VALUE, COST, SYNERGY, DAMAGE, ATTACK)
 
-for i_round in range(ROUNDS):
+for i_round in ROUNDS:
     game.update_game()
 
     payoffs = game.get_payoffs(human_1.get_action(),
@@ -53,5 +54,20 @@ Human 1: [c: {round(human_1.strategy, 2)}, s: {round(1 - human_1.strategy,2 )}]
 Human 2: [c: {round(human_2.strategy, 2)}, s: {round(1 - human_2.strategy,2 )}]
 Invader: [p: {round(invader.strategy, 2)}, a: {round(1 - invader.strategy,2 )}]
 '''
-
 print(output_string)
+
+# Plotting strategies
+plt.plot(ROUNDS, human_1.strategy_history, label = 'Human 1', color = 'blue')
+plt.plot(ROUNDS, human_2.strategy_history, label = 'Human 2', color = 'green')
+plt.plot(ROUNDS, invader.strategy_history, label = 'Invader', color = 'red')
+
+# Add title and labels
+plt.title('Players Strategy Profiles ')
+plt.xlabel('Interaction Number')
+plt.ylabel('Probability of Action 1')
+
+# Display the legend
+plt.legend()
+
+# Show the plot
+plt.savefig('Iterative_Strategy.png')

@@ -7,6 +7,7 @@ class PlayerInformation():
         self.action_set = action_set
         self.strategy = strategy
         self.total_payoff = 0
+        self.strategy_history = []
 
     def get_action(self):
         '''
@@ -24,10 +25,15 @@ class PlayerInformation():
     def update_strategy(self, my_payoff, game_payoff):
         
         if my_payoff >=0:
-            self.strategy += .1
+            self.strategy += .01
         else: 
-            self.strategy -= .1
+            self.strategy -= .01
+
+        # Incorporate the game information to shift the probabilities 
 
         # Make sure we bound the strategy between 0 and 1
         self.strategy = min([1, self.strategy])
         self.strategy = max([0, self.strategy])
+
+        # Storing history of strategy 
+        self.strategy_history.append(self.strategy)

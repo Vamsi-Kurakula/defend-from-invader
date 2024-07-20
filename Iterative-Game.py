@@ -9,8 +9,8 @@ from Classes.InvaderGamePayoffMatrix import InvaderGamePayoffMatrix
 from Classes.PlayerInformation import PlayerInformation
 
 # Human Focused Variables
-VALUE = 10 # Resource gain
-COST = 5 # Cost of Self Interest
+VALUE = 15 # Resource gain
+COST = 10 # Cost of Self Interest
 SYNERGY = 1.5 # Synergy Factor
 
 # Invader Focused Variables
@@ -18,10 +18,10 @@ DAMAGE = 20 # Damage from Invader
 ATTACK = 5 # Cost of Attacking from Invader
 
 # Simulation settings  
-ROUNDS = range(1000)
-human_1 = PlayerInformation(name='Human_1', action_set=['c', 's'], strategy=.5)
-human_2 = PlayerInformation(name='Human_2', action_set=['c', 's'], strategy=.5)
-invader = PlayerInformation(name='Invader', action_set=['p', 'a'], strategy=.9)
+ROUNDS = range(10000)
+human_1 = PlayerInformation(name='Collaborative Human (Slow Learner)', action_set=['c', 's'], strategy=.9,learning_rate=.0002)
+human_2 = PlayerInformation(name='Self-Interested Human (Fast Learner)', action_set=['c', 's'], strategy=.2,learning_rate=.002)
+invader = PlayerInformation(name='Invader (Medium Learner)', action_set=['p', 'a'], strategy=.9,learning_rate=.001)
 
 # Create and initalize game
 game = InvaderGamePayoffMatrix(VALUE, COST, SYNERGY, DAMAGE, ATTACK)
@@ -71,9 +71,9 @@ Invader: [p: {round(invader.strategy, 2)}, a: {round(1 - invader.strategy,2 )}]
 print(output_string)
 
 # Plotting strategies
-plt.plot(ROUNDS, human_1.strategy_history, label = 'Human 1 (Collaborate)', color = 'blue')
-plt.plot(ROUNDS, human_2.strategy_history, label = 'Human 2 (Collaborate)', color = 'green')
-plt.plot(ROUNDS, invader.strategy_history, label = 'Invader (Passive)', color = 'red')
+plt.plot(ROUNDS, human_1.strategy_history, label = human_1.name, color = 'blue')
+plt.plot(ROUNDS, human_2.strategy_history, label = human_2.name, color = 'green')
+plt.plot(ROUNDS, invader.strategy_history, label = invader.name, color = 'red')
 
 # Add title and labels
 plt.title('Players Strategy Profiles ')

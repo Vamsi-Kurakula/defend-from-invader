@@ -2,10 +2,11 @@ import random
 
 class PlayerInformation():
 
-    def __init__(self, name, action_set, strategy):
+    def __init__(self, name, action_set, strategy, learning_rate):
         self.name = name
         self.action_set = action_set
         self.strategy = strategy
+        self.learning_rate = learning_rate
         self.total_payoff = 0
         self.strategy_history = []
 
@@ -28,9 +29,9 @@ class PlayerInformation():
         factor = 1 if self.current_action == self.action_set[0] else -1
         
         if my_payoff >= alt_payoff:
-            self.strategy += .001 * factor
+            self.strategy += self.learning_rate * factor
         else: 
-            self.strategy -= .001 * factor
+            self.strategy -= self.learning_rate * factor
 
         # Make sure we bound the strategy between 0 and 1
         self.strategy = min([1, self.strategy])

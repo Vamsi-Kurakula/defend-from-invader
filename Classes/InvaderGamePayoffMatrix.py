@@ -18,7 +18,7 @@ class InvaderGamePayoffMatrix:
         self.synergy = S
         self.damage = D
         self.attack = A
-        self.block = D/2 #Damaged in a blocked attack
+        self.block = D/10 #Damaged in a blocked attack
         self.time = -1 # Start time at -1 so first update is time = 0
         self.game = {}
 
@@ -68,7 +68,7 @@ class InvaderGamePayoffMatrix:
         data = [
             ["", "", f"Time: {self.time}", "", ""],
             ["Invader:", "Passive", "", "Aggressive", ""],
-            ["Human 1/ Human 2", "Collaborate", "Self-Interest", "Collaborate", "Self-Interest"],
+            ["Human 1/Human 2", "Collaborate", "Self-Interest", "Collaborate", "Self-Interest"],
             ["Collaborate", self.game['c-c-p'], self.game['c-s-p'], self.game['c-c-a'], self.game['c-s-a']],
             ["Self-Interest", self.game['s-c-p'], self.game['s-s-p'], self.game['s-c-a'], self.game['s-s-a']]
         ]

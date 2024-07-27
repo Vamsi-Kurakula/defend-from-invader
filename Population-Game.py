@@ -3,6 +3,7 @@ Driver file for population dynamics in the tripartite game
 '''
 
 import random
+import pandas as pd
 import matplotlib.pyplot as plt
 from Classes.InvaderGamePayoffMatrix import InvaderGamePayoffMatrix
 from Classes.PlayerInformation import PlayerInformation
@@ -21,6 +22,10 @@ HUMAN_COLLABORATE = 40
 HUMAN_SELF_INTERESTED = 10
 INVADER_PASSIVE = 20
 INVADER_ACTIVE = 30
+
+# Simulation Settings 
+NUM_ITERATIONS = 10_000
+DT = .0001
 
 
 def get_rep_dynamics(pop, game):
@@ -58,18 +63,47 @@ def main():
 
     # Create and initalize game
     game = InvaderGamePayoffMatrix(VALUE, COST, SYNERGY, DAMAGE, ATTACK)
-    game.update_game()
-
-    # Get population distributions 
     population = [HUMAN_COLLABORATE, HUMAN_SELF_INTERESTED, INVADER_PASSIVE, INVADER_ACTIVE]
-    population = [x/sum(population) for x in population]
 
-    # Get replication dynamics
-    changes = get_rep_dynamics(population, game)
+    # Create Storage for Population Distributions
+    population_df = pd.DataFrame(columns=['iteration', 'human_collab', 'human_self', 'invader_passive', 'invader_active'])
+
+    for i_Iter in range(NUM_ITERATIONS):
+        # Update Game
+        game.update_game()
+        # Normalize Population 
+        population = [x/sum(population) for x in population]
+
+        # Record information
+        new_row = pd.DataFrame([{'iteration':i_Iter, 
+                                 'human_collab': population[0], 
+                                 'human_self':population[1], 
+                                 'invader_passive': population[2], 
+                                 'invader_active': population[3]}])
+        population_df = pd.concat([new_row, population_df], ignore_index=True)
+
+        # Get replication dynamics and update populations
+        changes = get_rep_dynamics(population, game)
+        population[0] += DT * changes['h_c']
+        population[1] += DT * changes['h_s']
+        population[2] += DT * changes['i_p']
+        population[3] += DT * changes['i_a']
 
     game.print_gamestate()
-    print(population)
-    print(changes)
+
+    # Population Proportion Plot
+    plt.plot(population_df['iteration'], population_df['human_collab'], label = 'Humans-Collaborative', color = 'blue')
+    plt.plot(population_df['iteration'], population_df['human_self'], label = 'Humans-Self Interested', color = 'green')
+    plt.plot(population_df['iteration'], population_df['invader_passive'], label = 'Invader-Passive', color = 'orange')
+    plt.plot(population_df['iteration'], population_df['invader_active'], label = 'Invader-Active', color = 'red')
+    # Add title and labels
+    plt.title('Population Proportions Over Time')
+    plt.xlabel('Iteration Number')
+    plt.ylabel(f'Proportion of Population')
+    plt.legend()
+    # Show the plot
+    plt.savefig(f'Population-Game-Images/population-{HUMAN_COLLABORATE}-{HUMAN_SELF_INTERESTED}-{INVADER_PASSIVE}-{INVADER_PASSIVE}.png')
+    plt.close()
 
 if __name__ == '__main__':
     main()

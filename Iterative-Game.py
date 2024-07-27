@@ -117,5 +117,5 @@ for iCase in CASES:
     plt.legend()
 
     # Show the plot
-    plt.savefig(f'Iterative_Strategy_Images\{iCase["name"]}.png')
+    plt.savefig(f'Iterative_Game_Images\{iCase["name"]}.png')
     plt.close()

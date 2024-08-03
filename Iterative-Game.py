@@ -49,6 +49,31 @@ CASES = [{"name": "Same_Learning_Rates",
           "lr":[.0002, .001, .002],
           "lr_name":["Slow", "Medium", "Fast"]
           }, 
+         {"name": "H1-Medium_H2-Medium_Inv-Slow",
+          "lr":[.001, .001, .0002],
+          "lr_name":["Medium", "Medium", "Slow"]
+          }, 
+         {"name": "H1-Medium_H2-Medium_Inv-Fast",
+          "lr":[.001, .001, .002],
+          "lr_name":["Medium", "Medium", "Fast"]
+          }, 
+         {"name": "H1-Slow_H2-Slow_Inv-Medium",
+          "lr":[.0002, .0002, .001],
+          "lr_name":["Slow", "Slow", "Medium"]
+          }, 
+         {"name": "H1-Slow_H2-Slow_Inv-Fast",
+          "lr":[.0002, .0002, .002],
+          "lr_name":["Slow", "Slow", "Fast"]
+          }, 
+         {"name": "H1-Fast_H2-Fast_Inv-Medium",
+          "lr":[.002, .002, .001],
+          "lr_name":["Fast", "Fast", "Medium"]
+          }, 
+         {"name": "H1-Fast_H2-Fast_Inv-Slow",
+          "lr":[.002, .002, .0002],
+          "lr_name":["Fast", "Fast", "Slow"]
+          }, 
+
 ] 
 
 for iCase in CASES:

@@ -21,60 +21,60 @@ ATTACK = 5 # Cost of Attacking from Invader
 ROUNDS = range(10_000)
 
 # Setting up different learning rate cases
-CASES = [{"name": "Same_Learning_Rates",
-          "lr":[.001, .001, .001],
-          "lr_name":["Same", "Same", "Same"]
-          }, 
-         {"name": "H1-Slow_H2-Fast_Inv-Medium",
-          "lr":[.0002, .002, .001],
-          "lr_name":["Slow", "Fast", "Medium"]
-          },  
-         {"name": "H1-Fast_H2-Slow_Inv-Medium",
-          "lr":[.002, .0002, .001],
-          "lr_name":["Fast", "Slow", "Medium"]
-          },  
-         {"name": "H1-Fast_H2-Medium_Inv-Slow",
-          "lr":[.002, .001, .0002],
-          "lr_name":["Fast", "Medium", "Slow"]
-          },  
-         {"name": "H1-Medium_H2-Fast_Inv-Slow",
-          "lr":[.001, .002, .0002],
-          "lr_name":["Medium", "Fast", "Slow"]
-          },  
-         {"name": "H1-Medium_H2-Slow_Inv-Fast",
-          "lr":[.001, .0002, .002],
-          "lr_name":["Medium", "Slow", "Fast"]
-          }, 
-         {"name": "H1-Slow_H2-Medium_Inv-Fast",
-          "lr":[.0002, .001, .002],
-          "lr_name":["Slow", "Medium", "Fast"]
-          }, 
-         {"name": "H1-Medium_H2-Medium_Inv-Slow",
-          "lr":[.001, .001, .0002],
-          "lr_name":["Medium", "Medium", "Slow"]
-          }, 
-         {"name": "H1-Medium_H2-Medium_Inv-Fast",
-          "lr":[.001, .001, .002],
-          "lr_name":["Medium", "Medium", "Fast"]
-          }, 
-         {"name": "H1-Slow_H2-Slow_Inv-Medium",
-          "lr":[.0002, .0002, .001],
-          "lr_name":["Slow", "Slow", "Medium"]
-          }, 
-         {"name": "H1-Slow_H2-Slow_Inv-Fast",
-          "lr":[.0002, .0002, .002],
-          "lr_name":["Slow", "Slow", "Fast"]
-          }, 
-         {"name": "H1-Fast_H2-Fast_Inv-Medium",
-          "lr":[.002, .002, .001],
-          "lr_name":["Fast", "Fast", "Medium"]
-          }, 
-         {"name": "H1-Fast_H2-Fast_Inv-Slow",
-          "lr":[.002, .002, .0002],
-          "lr_name":["Fast", "Fast", "Slow"]
-          }, 
-
-] 
+CASES = [
+{"name": "Same_Learning_Rates",
+ "lr":[.001, .001, .001],
+ "lr_name":["Same", "Same", "Same"]
+ }, 
+{"name": "H1-Slow_H2-Fast_Inv-Medium",
+ "lr":[.0002, .002, .001],
+ "lr_name":["Slow", "Fast", "Medium"]
+ },  
+{"name": "H1-Fast_H2-Slow_Inv-Medium",
+ "lr":[.002, .0002, .001],
+ "lr_name":["Fast", "Slow", "Medium"]
+ },  
+{"name": "H1-Fast_H2-Medium_Inv-Slow",
+ "lr":[.002, .001, .0002],
+ "lr_name":["Fast", "Medium", "Slow"]
+ },  
+{"name": "H1-Medium_H2-Fast_Inv-Slow",
+ "lr":[.001, .002, .0002],
+ "lr_name":["Medium", "Fast", "Slow"]
+ },  
+{"name": "H1-Medium_H2-Slow_Inv-Fast",
+ "lr":[.001, .0002, .002],
+ "lr_name":["Medium", "Slow", "Fast"]
+ }, 
+{"name": "H1-Slow_H2-Medium_Inv-Fast",
+ "lr":[.0002, .001, .002],
+ "lr_name":["Slow", "Medium", "Fast"]
+ }, 
+{"name": "H1-Medium_H2-Medium_Inv-Slow",
+ "lr":[.001, .001, .0002],
+ "lr_name":["Medium", "Medium", "Slow"]
+ }, 
+{"name": "H1-Medium_H2-Medium_Inv-Fast",
+ "lr":[.001, .001, .002],
+ "lr_name":["Medium", "Medium", "Fast"]
+ }, 
+{"name": "H1-Slow_H2-Slow_Inv-Medium",
+ "lr":[.0002, .0002, .001],
+ "lr_name":["Slow", "Slow", "Medium"]
+ }, 
+{"name": "H1-Slow_H2-Slow_Inv-Fast",
+ "lr":[.0002, .0002, .002],
+ "lr_name":["Slow", "Slow", "Fast"]
+ }, 
+{"name": "H1-Fast_H2-Fast_Inv-Medium",
+ "lr":[.002, .002, .001],
+ "lr_name":["Fast", "Fast", "Medium"]
+ }, 
+{"name": "H1-Fast_H2-Fast_Inv-Slow",
+ "lr":[.002, .002, .0002],
+ "lr_name":["Fast", "Fast", "Slow"]
+ },
+]
 
 for iCase in CASES:
     human_1 = PlayerInformation(name=f'Collaborative Human ({iCase["lr_name"][0]} Learner)', action_set=['c', 's'], strategy=.9,learning_rate=iCase["lr"][0])

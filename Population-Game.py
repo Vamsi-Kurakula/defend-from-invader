@@ -18,14 +18,14 @@ DAMAGE = 20 # Damage from Invader
 ATTACK = 5 # Cost of Attacking from Invader
 
 # Inital Populaiton Distributions
-HUMAN_COLLABORATE = 40
-HUMAN_SELF_INTERESTED = 10
-INVADER_PASSIVE = 20
-INVADER_ACTIVE = 30
+HUMAN_COLLABORATE = 1
+HUMAN_SELF_INTERESTED = 3
+INVADER_PASSIVE = 1
+INVADER_ACTIVE = 1
 
 # Simulation Settings 
 NUM_ITERATIONS = 10_000
-DT = .0001
+DT = .001
 
 
 def get_rep_dynamics(pop, game):
@@ -97,12 +97,12 @@ def main():
     plt.plot(population_df['iteration'], population_df['invader_passive'], label = 'Invader-Passive', color = 'orange')
     plt.plot(population_df['iteration'], population_df['invader_active'], label = 'Invader-Active', color = 'red')
     # Add title and labels
-    plt.title('Population Proportions Over Time')
+    plt.title(f'Inital State: {HUMAN_COLLABORATE}-{HUMAN_SELF_INTERESTED}-{INVADER_PASSIVE}-{INVADER_ACTIVE}')
     plt.xlabel('Iteration Number')
     plt.ylabel(f'Proportion of Population')
     plt.legend()
     # Show the plot
-    plt.savefig(f'Population-Game-Images/population-{HUMAN_COLLABORATE}-{HUMAN_SELF_INTERESTED}-{INVADER_PASSIVE}-{INVADER_PASSIVE}.png')
+    plt.savefig(f'Population-Game-Images/population-{HUMAN_COLLABORATE}-{HUMAN_SELF_INTERESTED}-{INVADER_PASSIVE}-{INVADER_ACTIVE}.png')
     plt.close()
 
 if __name__ == '__main__':

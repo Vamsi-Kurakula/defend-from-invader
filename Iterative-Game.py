@@ -16,6 +16,7 @@ SYNERGY = 1.5 # Synergy Factor
 # Invader Focused Variables
 DAMAGE = 20 # Damage from Invader
 ATTACK = 5 # Cost of Attacking from Invader
+BLOCK = 2
 
 # Simulation settings  
 ROUNDS = range(10_000)
@@ -82,7 +83,7 @@ for iCase in CASES:
     invader = PlayerInformation(name=f'Invader ({iCase["lr_name"][2]} Learner)', action_set=['p', 'a'], strategy=.9,learning_rate=iCase["lr"][2])
 
     # Create and initalize game
-    game = InvaderGamePayoffMatrix(VALUE, COST, SYNERGY, DAMAGE, ATTACK)
+    game = InvaderGamePayoffMatrix(VALUE, COST, SYNERGY, DAMAGE, ATTACK, BLOCK)
 
     for i_round in ROUNDS:
         game.update_game()

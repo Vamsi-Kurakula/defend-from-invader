@@ -2,7 +2,7 @@ import pandas as pd
 from tabulate import tabulate
 
 class InvaderGamePayoffMatrix:
-    def __init__(self, V, C, S, D, A):
+    def __init__(self, V, C, S, D, A, B):
         """
         Initializes a Tripartitite Invader Game 
     
@@ -18,7 +18,7 @@ class InvaderGamePayoffMatrix:
         self.synergy = S
         self.damage = D
         self.attack = A
-        self.block = D/10 #Damaged in a blocked attack
+        self.block = B
         self.time = -1 # Start time at -1 so first update is time = 0
         self.game = {}
 

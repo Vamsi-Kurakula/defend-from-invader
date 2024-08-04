@@ -9,22 +9,26 @@ from Classes.InvaderGamePayoffMatrix import InvaderGamePayoffMatrix
 from Classes.PlayerInformation import PlayerInformation
 
 # Human Focused Variables
-VALUE = 15 # Resource gain
-COST = 10 # Cost of Self Interest
+#VALUE = 15 # Resource gain
+#COST = 10 # Cost of Self Interest
+#SYNERGY = 1.5 # Synergy Factor
+
+## Invader Focused Variables
+#DAMAGE = 20 # Damage from Invader
+#ATTACK = 5 # Cost of Attacking from Invader
+
+# Human Focused Variables
+VALUE = 10 # Resource gain
+COST = 15 # Cost of Self Interest
 SYNERGY = 1.5 # Synergy Factor
 
 # Invader Focused Variables
-DAMAGE = 20 # Damage from Invader
-ATTACK = 5 # Cost of Attacking from Invader
-
-# Inital Populaiton Distributions
-HUMAN_COLLABORATE = 1
-HUMAN_SELF_INTERESTED = 3
-INVADER_PASSIVE = 1
-INVADER_ACTIVE = 1
+DAMAGE = 15  # Damage from Invader
+ATTACK = 6 # Cost of Attacking from Invader
+BLOCK = 7 # Blocked Damage
 
 # Simulation Settings 
-NUM_ITERATIONS = 10_000
+NUM_ITERATIONS = 15_000
 DT = .001
 
 
@@ -108,7 +112,7 @@ def main():
        invader_active = iCase["invader_active"]
        
        # Create and initalize game
-       game = InvaderGamePayoffMatrix(VALUE, COST, SYNERGY, DAMAGE, ATTACK)
+       game = InvaderGamePayoffMatrix(VALUE, COST, SYNERGY, DAMAGE, ATTACK, BLOCK)
        population = [human_collaborate, human_self_interested, invader_passive, invader_active]
 
        # Create Storage for Population Distributions

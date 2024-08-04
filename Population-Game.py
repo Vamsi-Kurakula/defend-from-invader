@@ -152,7 +152,7 @@ def main():
        plt.ylabel(f'Proportion of Population')
        plt.legend()
        # Show the plot
-       plt.savefig(f'Population-Game-Images/population-{human_collaborate}-{human_self_interested}-{invader_passive}-{invader_active}.png')
+       plt.savefig(f'Population_Game_Images/population-{human_collaborate}-{human_self_interested}-{invader_passive}-{invader_active}.png')
        plt.close()
 
 if __name__ == '__main__':

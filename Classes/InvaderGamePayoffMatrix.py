@@ -53,9 +53,9 @@ class InvaderGamePayoffMatrix:
         self.game['s-c-a'] = [self.value - self.damage,
                               -self.damage,
                               -1 * (self.value - (2* self.damage) + self.attack)]
-        self.game['s-s-a'] = [self.value/2 - self.cost - self.damage,
-                              self.value/2 - self.cost - self.damage,
-                              -1 *(self.value - (2* self.cost) - (2*self.damage)  + self.attack)]
+        self.game['s-s-a'] = [((self.value - self.cost)/2) - self.damage,
+                              ((self.value - self.cost)/2) - self.damage,
+                              -1 *(self.value - self.cost - (2*self.damage)  + self.attack)]
 
     def get_payoffs(self, human1, human2, invader):
         '''

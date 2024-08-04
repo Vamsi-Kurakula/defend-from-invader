@@ -9,23 +9,14 @@ from Classes.InvaderGamePayoffMatrix import InvaderGamePayoffMatrix
 from Classes.PlayerInformation import PlayerInformation
 
 # Human Focused Variables
-#VALUE = 15 # Resource gain
-#COST = 10 # Cost of Self Interest
-#SYNERGY = 1.5 # Synergy Factor
-
-## Invader Focused Variables
-#DAMAGE = 20 # Damage from Invader
-#ATTACK = 5 # Cost of Attacking from Invader
-
-# Human Focused Variables
-VALUE = 10 # Resource gain
-COST = 15 # Cost of Self Interest
+VALUE = 15 # Resource gain
+COST = 10 # Cost of Self Interest
 SYNERGY = 1.5 # Synergy Factor
 
 # Invader Focused Variables
-DAMAGE = 5  # Damage from Invader
-ATTACK = 10 # Cost of Attacking from Invader
-BLOCK = 4 # Blocked Damage
+DAMAGE = 20 # Damage from Invader
+ATTACK = 5 # Cost of Attacking from Invader
+BLOCK = 2
 
 # Simulation Settings 
 NUM_ITERATIONS = 10_000
@@ -58,6 +49,26 @@ CASES = [
 "human_self_interested":1,
 "invader_passive":1,
 "invader_active":1
+}, 
+{"human_collab": 1,
+"human_self_interested":1,
+"invader_passive":10,
+"invader_active":1
+}, 
+{"human_collab": 1,
+"human_self_interested":1,
+"invader_passive":100,
+"invader_active":1
+}, 
+{"human_collab": 1,
+"human_self_interested":1,
+"invader_passive":1,
+"invader_active":10
+}, 
+{"human_collab": 1,
+"human_self_interested":1,
+"invader_passive":1,
+"invader_active":100
 }, 
 ] 
 
@@ -137,7 +148,7 @@ def main():
        plt.plot(population_df['iteration'], population_df['invader_passive'], label = f"Invader-Passive End: {round(population_df['invader_passive'].iloc[0], 2)}", color = 'orange')
        plt.plot(population_df['iteration'], population_df['invader_active'], label = f"Invader-Active End: {round(population_df['invader_active'].iloc[0], 2)}", color = 'red')
        # Add title and labels
-       plt.title(f'Inital State: H_C:{human_collaborate}-H_S:{human_self_interested}-I_P:{invader_passive}-I_A{invader_active}')
+       plt.title(f'Inital State: H_C:{human_collaborate} H_S:{human_self_interested} I_P:{invader_passive} I_A{invader_active}')
        plt.xlabel('Iteration Number')
        plt.ylabel(f'Proportion of Population')
        plt.legend()

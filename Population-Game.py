@@ -23,12 +23,12 @@ COST = 15 # Cost of Self Interest
 SYNERGY = 1.5 # Synergy Factor
 
 # Invader Focused Variables
-DAMAGE = 15  # Damage from Invader
-ATTACK = 6 # Cost of Attacking from Invader
-BLOCK = 7 # Blocked Damage
+DAMAGE = 5  # Damage from Invader
+ATTACK = 10 # Cost of Attacking from Invader
+BLOCK = 4 # Blocked Damage
 
 # Simulation Settings 
-NUM_ITERATIONS = 15_000
+NUM_ITERATIONS = 10_000
 DT = .001
 
 
@@ -40,34 +40,24 @@ CASES = [
 "invader_active":1
 }, 
 {"human_collab": 1,
-"human_self_interested":2,
+"human_self_interested":10,
 "invader_passive":1,
 "invader_active":1
 }, 
 {"human_collab": 1,
-"human_self_interested":3,
+"human_self_interested":100,
 "invader_passive":1,
 "invader_active":1
-}, 
-{"human_collab": 2,
-"human_self_interested":3,
-"invader_passive":1,
-"invader_active":1
-}, 
-{"human_collab": 5,
-"human_self_interested":2,
-"invader_passive":46,
-"invader_active":9
-}, 
-{"human_collab": 9,
-"human_self_interested":7,
-"invader_passive":6,
-"invader_active":5
 }, 
 {"human_collab": 10,
-"human_self_interested":12,
-"invader_passive":79,
-"invader_active":100
+"human_self_interested":1,
+"invader_passive":1,
+"invader_active":1
+}, 
+{"human_collab": 100,
+"human_self_interested":1,
+"invader_passive":1,
+"invader_active":1
 }, 
 ] 
 
@@ -142,12 +132,12 @@ def main():
        game.print_gamestate()
 
        # Population Proportion Plot
-       plt.plot(population_df['iteration'], population_df['human_collab'], label = 'Humans-Collaborative', color = 'blue')
-       plt.plot(population_df['iteration'], population_df['human_self'], label = 'Humans-Self Interested', color = 'green')
-       plt.plot(population_df['iteration'], population_df['invader_passive'], label = 'Invader-Passive', color = 'orange')
-       plt.plot(population_df['iteration'], population_df['invader_active'], label = 'Invader-Active', color = 'red')
+       plt.plot(population_df['iteration'], population_df['human_collab'], label = f"Humans-Collaborative End: {round(population_df['human_collab'].iloc[0], 2)}", color = 'blue')
+       plt.plot(population_df['iteration'], population_df['human_self'], label = f"Humans-Self Interested End: {round(population_df['human_self'].iloc[0], 2)}", color = 'green')
+       plt.plot(population_df['iteration'], population_df['invader_passive'], label = f"Invader-Passive End: {round(population_df['invader_passive'].iloc[0], 2)}", color = 'orange')
+       plt.plot(population_df['iteration'], population_df['invader_active'], label = f"Invader-Active End: {round(population_df['invader_active'].iloc[0], 2)}", color = 'red')
        # Add title and labels
-       plt.title(f'Inital State: {human_collaborate}-{human_self_interested}-{invader_passive}-{invader_active}')
+       plt.title(f'Inital State: H_C:{human_collaborate}-H_S:{human_self_interested}-I_P:{invader_passive}-I_A{invader_active}')
        plt.xlabel('Iteration Number')
        plt.ylabel(f'Proportion of Population')
        plt.legend()

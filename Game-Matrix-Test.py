@@ -10,9 +10,9 @@ COST = 15 # Cost of Self Interest
 SYNERGY = 1.5 # Synergy Factor
 
 # Invader Focused Variables
-DAMAGE = 15  # Damage from Invader
-ATTACK = 6 # Cost of Attacking from Invader
-BLOCK = 7 # Blocked Damage
+DAMAGE = 5  # Damage from Invader
+ATTACK = 10 # Cost of Attacking from Invader
+BLOCK = 4 # Blocked Damage
 
 game = InvaderGamePayoffMatrix(VALUE, COST, SYNERGY, DAMAGE, ATTACK, BLOCK)
 game.update_game()

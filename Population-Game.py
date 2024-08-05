@@ -148,7 +148,7 @@ def main():
        plt.plot(population_df['iteration'], population_df['invader_passive'], label = f"Invader-Passive End: {round(population_df['invader_passive'].iloc[0], 2)}", color = 'orange')
        plt.plot(population_df['iteration'], population_df['invader_active'], label = f"Invader-Active End: {round(population_df['invader_active'].iloc[0], 2)}", color = 'red')
        # Add title and labels
-       plt.title(f'Inital State: H_C:{human_collaborate} H_S:{human_self_interested} I_P:{invader_passive} I_A{invader_active}')
+       plt.title(f'Inital State: H_C:{human_collaborate} H_S:{human_self_interested} I_P:{invader_passive} I_A:{invader_active}')
        plt.xlabel('Iteration Number')
        plt.ylabel(f'Proportion of Population')
        plt.legend()

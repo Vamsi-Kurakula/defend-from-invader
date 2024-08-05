@@ -19,52 +19,52 @@ ATTACK = 5 # Cost of Attacking from Invader
 BLOCK = 2
 
 # Simulation Settings 
-NUM_ITERATIONS = 10_000
+NUM_ITERATIONS = 50_000
 DT = .001
 
 
 # Setting up different learning rate cases
 CASES = [
-{"human_collab": 1,
-"human_self_interested":1,
-"invader_passive":1,
-"invader_active":1
-}, 
-{"human_collab": 1,
-"human_self_interested":10,
-"invader_passive":1,
-"invader_active":1
-}, 
-{"human_collab": 1,
-"human_self_interested":100,
-"invader_passive":1,
-"invader_active":1
-}, 
-{"human_collab": 10,
-"human_self_interested":1,
-"invader_passive":1,
-"invader_active":1
-}, 
-{"human_collab": 100,
-"human_self_interested":1,
-"invader_passive":1,
-"invader_active":1
-}, 
-{"human_collab": 1,
-"human_self_interested":1,
-"invader_passive":10,
-"invader_active":1
-}, 
+#{"human_collab": 1,
+#"human_self_interested":1,
+#"invader_passive":1,
+#"invader_active":1
+#}, 
+#{"human_collab": 1,
+#"human_self_interested":10,
+#"invader_passive":1,
+#"invader_active":1
+#}, 
+#{"human_collab": 1,
+#"human_self_interested":100,
+#"invader_passive":1,
+#"invader_active":1
+#}, 
+#{"human_collab": 10,
+#"human_self_interested":1,
+#"invader_passive":1,
+#"invader_active":1
+#}, 
+#{"human_collab": 100,
+#"human_self_interested":1,
+#"invader_passive":1,
+#"invader_active":1
+#}, 
+#{"human_collab": 1,
+#"human_self_interested":1,
+#"invader_passive":10,
+#"invader_active":1
+#}, 
 {"human_collab": 1,
 "human_self_interested":1,
 "invader_passive":100,
 "invader_active":1
 }, 
-{"human_collab": 1,
-"human_self_interested":1,
-"invader_passive":1,
-"invader_active":10
-}, 
+#{"human_collab": 1,
+#"human_self_interested":1,
+#"invader_passive":1,
+#"invader_active":10
+#}, 
 {"human_collab": 1,
 "human_self_interested":1,
 "invader_passive":1,
